@@ -18,7 +18,7 @@
      Board();
      const static int SIZE = 9;
      // board(std::istream &input);
-     // void printBoard();
+     void printBoard();
  private:
      short grid[SIZE][SIZE];
      
