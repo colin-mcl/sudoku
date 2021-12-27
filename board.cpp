@@ -5,12 +5,12 @@
  * The implementation of a board object.
  */
  
- #include "board.h"
+ #include "Board.h"
  
- 
- int main(int argc, char *argv[]) {
-     
-     printf("Hello, world!\n");
-     
-     return 0;
+ Board::Board() {
+     for (int i = 0; i < SIZE; i++) {
+         for (int j = 0; j < SIZE; j++) {
+             grid[i][j] = 0;
+         }
+     }
  }

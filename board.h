@@ -12,12 +12,17 @@
  
  #include <iostream>
  
- class board{
+ 
+ class Board{
  public:
-     board();
+     Board();
+     const static int SIZE = 9;
      // board(std::istream &input);
      // void printBoard();
+ private:
+     short grid[SIZE][SIZE];
      
  };
  
  #endif
+ 
