@@ -11,13 +11,25 @@
  #define BOARD_H
  
  #include <iostream>
+ #include <cstdio>
  
- class board{
+ 
+ class Board{
  public:
-     board();
-     // board(std::istream &input);
-     // void printBoard();
+     const static int SIZE = 9;
+
+     Board();
+     Board(std::istream &input);
+     void printBoard();
+     void insert(short row, short col, short val);
+     short get(short row, short col);
+
+ private:
+     short grid[SIZE][SIZE];
+     
+     void invalid_input();
      
  };
  
  #endif
+ 
