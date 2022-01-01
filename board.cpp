@@ -1,4 +1,4 @@
-/* board.cpp
+/* Board.cpp
  * By Colin Mclaughlin
  * December 2021
  *

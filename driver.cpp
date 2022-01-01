@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Board.h"
+#include "Puzzle.h"
 
 int main(int argc, char *argv[]) {
     
     Board board;
-    printf("Created board\n");
+    Puzzle puzzle;
     return 0;
 }
