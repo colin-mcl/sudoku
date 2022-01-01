@@ -1,4 +1,4 @@
-/* board.h
+/* Board.h
  * By Colin Mclaughlin
  * December 2021
  *
