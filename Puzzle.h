@@ -10,9 +10,17 @@
  #define PUZZLE_H
  
  #include "Board.h"
+ #include <iostream>
  
- class Puzzle {
-     
+ class Puzzle{
+ public:
+     Puzzle(Board *original);
+     void solve();
+ private:
+     Board *board_p;
+     int rows[9];
+     int cols[9];
+     int squares[9];
  };
  
  

@@ -32,6 +32,7 @@
          }
      }
  }
+ 
 
 
 void Board::printBoard() {
