@@ -20,17 +20,6 @@
  }
  
  void Puzzle::solve() {
-    // for (int i = 0; i < 9; i++) {
-    //     for (int j = 0; j < 9; j++) {
-    //         short val;
-    //         std::cin >> val;
-    //         if (canPlace(i, j, val)) place(i, j, val);
-    //     }
-    // }
-    // 
-    // if(allFound())
-    //     board_p->printBoard();
-     
      if (solve(0, 0))
         board_p->printBoard();
     else
@@ -39,8 +28,10 @@
  }
  
  bool Puzzle::solve(int row, int col) {
-     if (allFound() || col > 8)
+     if (allFound())
         return true;
+     else if (col > 8)
+        return false;
      else if (row > 8) {
          return solve(0, col + 1);
      }
