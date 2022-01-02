@@ -21,6 +21,11 @@
      int rows[9];
      int cols[9];
      int squares[9];
+     
+     bool canPlace(short val, int row, int col);
+     bool numFound(int found, short val);
+     void initVals();
+     int setFound(int found, short val);
  };
  
  
