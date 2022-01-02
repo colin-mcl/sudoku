@@ -20,15 +20,73 @@
  }
  
  void Puzzle::solve() {
-
-     board_p->printBoard();
+    // for (int i = 0; i < 9; i++) {
+    //     for (int j = 0; j < 9; j++) {
+    //         short val;
+    //         std::cin >> val;
+    //         if (canPlace(i, j, val)) place(i, j, val);
+    //     }
+    // }
+    // 
+    // if(allFound())
+    //     board_p->printBoard();
      
-     for (int i = 0; i < 9; i++) {
-         for (int j = 1; j <= 9; j++) {
-             if (numFound(squares[i], j))
-                std::cout << j << " in square " << i << "\n";
+     if (solve(0, 0))
+        board_p->printBoard();
+    else
+        std::cout << "Puzzle cannot be solved!\n";
+     
+ }
+ 
+ bool Puzzle::solve(int row, int col) {
+     if (allFound() || col > 8)
+        return true;
+     else if (row > 8) {
+         return solve(0, col + 1);
+     }
+     else if (board_p->get(row, col) != 0) {
+         return solve(row + 1, col);
+     }
+     else {
+         for (short i = 1; i <= 9; i++) {
+             if (canPlace(row, col, i)) {
+                 place(row, col, i);
+                 if (solve(row + 1, col))
+                    return true;
+                 else
+                     clear(row, col, i);
+             }
          }
      }
+     
+     return false;
+ }
+ 
+ bool Puzzle::allFound() {
+     for (int i = 0; i < 9; i++) {
+          if (rows[i] != 511 || cols[i] != 511 || squares[i] != 511)
+            return false;
+     }
+     
+     return true;
+ }
+ 
+ void Puzzle::clear(int row, int col, short val) {
+     board_p->insert(row, col, 0);
+     rows[row] = clearFound(rows[row], val);
+     cols[col] = clearFound(cols[col], val);
+     
+     int squarePos = ((row / 3) * 3) + (col / 3);
+     squares[squarePos] = clearFound(squares[squarePos], val);
+ }
+ 
+ void Puzzle::place(int row, int col, short val) {
+     board_p->insert(row, col, val);
+     rows[row] = setFound(rows[row], val);
+     cols[col] = setFound(cols[col], val);
+     
+     int squarePos = ((row / 3) * 3) + (col / 3);
+     squares[squarePos] = setFound(squares[squarePos], val);
  }
  
  void Puzzle::initVals() {
@@ -57,12 +115,18 @@
      return found;
  }
  
+ int Puzzle::clearFound(int found, short val) {
+     int mask = 1;
+     mask = mask << (val - 1);
+     mask = ~mask;
+     return found & mask; 
+ }
  //returns true if the value can be placed at position (row, col) in the board
- bool Puzzle::canPlace(short val, int row, int col) {
+ bool Puzzle::canPlace(int row, int col, short val) {
      int squarePos = ((row / 3) * 3) + (col / 3);
      
      //if the number is not found in the row, column and square, return true
-     return not (numFound(rows[row], val) && numFound(cols[col], val) &&
+     return not (numFound(rows[row], val) || numFound(cols[col], val) ||
             numFound(squares[squarePos], val));
  }
  

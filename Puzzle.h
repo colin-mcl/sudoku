@@ -22,10 +22,18 @@
      int cols[9];
      int squares[9];
      
-     bool canPlace(short val, int row, int col);
+     bool solve(int row, int col);
+     
+     bool canPlace(int row, int col, short val);
      bool numFound(int found, short val);
-     void initVals();
      int setFound(int found, short val);
+     int clearFound(int found, short val);
+     bool allFound();
+
+     void initVals();
+     void place(int row, int col, short val);
+     void clear(int row, int col, short val);
+
  };
  
  
