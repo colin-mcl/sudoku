@@ -6,7 +6,8 @@
  */
  
  #include "Board.h"
- 
+ // default constructor
+ // creates a blank board object (all 0s)
  Board::Board() {
      for (int i = 0; i < SIZE; i++) {
          for (int j = 0; j < SIZE; j++) {
@@ -15,17 +16,24 @@
      }
  }
  
+ /* istream constructor
+  * 
+  * expects an istream object which will read 81 integers from 0-9 to fill in
+  * the board
+  *
+  * starts from (0,0) and fills in row by row
+  */
  Board::Board(std::istream &input) {
     char digit;
      for (int i = 0; i < SIZE; i++) {
          for (int j = 0; j < SIZE; j++) {
              
              if (input.eof())
-                 invalid_input();
+                 invalid_input(); //if 81 ints are not provided
              else {
                  input >> digit;
                  digit -= '0';
-                 if (digit > 9 || digit < 0)
+                 if (digit > 9 || digit < 0) //if the input is not 0-9
                     invalid_input();
                  grid[i][j] = digit;
              }
@@ -34,7 +42,7 @@
  }
  
 
-
+//prints the sudoku board
 void Board::printBoard() {
     printf("-------------------------\n");
     for (int i = 0; i < SIZE; i++) {
@@ -56,12 +64,18 @@ void Board::printBoard() {
     }
 }
 
+//catches invalid inputs and exits
 void Board::invalid_input() {
     std::cerr << "ERROR: insufficient input values provided\n"
                         "Please provide a 9x9 grid of integers from 0-9.\n";
     exit(EXIT_FAILURE);
 }
 
+/* Input: expects two numbers from 0-8 for the row and column at which to 
+ *        insert, and a number from 0-9 to insert
+ *
+ * Purpose: inserts val at position (row, col) in the board
+ */
 void Board::insert(short row, short col, short val) {
     if (row < 0 || row > SIZE - 1 || col < 0 || col > SIZE - 1) {
         std::cerr << "ERROR: attempted to insert out of bounds [0,8]\n";
@@ -74,6 +88,11 @@ void Board::insert(short row, short col, short val) {
     }
 }
 
+/* Input: expects two numbers from 0-8 for the row and column to retrieve
+ *        from the board
+ *
+ * Purpose: returns the board element at position (row, col)
+ */
 short Board::get(short row, short col) {
     if (row < 0 || row > SIZE - 1 || col < 0 || col > SIZE - 1) {
         std::cerr << "ERROR: attempted to retrieve from out of bounds [0,8]\n";
